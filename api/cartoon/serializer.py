@@ -33,7 +33,7 @@ class SearchSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def get_tweet_id(obj):
-        return obj.tweet_id if obj.tweet_id > 0 else None
+        return str(obj.tweet_id) if obj.tweet_id > 0 else None
 
     @staticmethod
     def get_characters(obj):
