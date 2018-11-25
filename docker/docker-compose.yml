@@ -1,0 +1,25 @@
+version: "3.2"
+services:
+  db:
+    image: zaubermaerchen/mariadb-mroonga
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: imas_sc
+      MYSQL_PASSWORD: imas_sc
+      MYSQL_DATABASE: imas_sc
+    volumes:
+      - type: bind
+        source: ../sql
+        target: /docker-entrypoint-initdb.d
+  app:
+    build: ./app
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ../
+        target: /home
