@@ -11,15 +11,15 @@ services:
       MYSQL_DATABASE: imas_sc
     volumes:
       - type: bind
-        source: ../sql
+        source: ./sql
         target: /docker-entrypoint-initdb.d
   app:
-    build: ./app
+    build: docker/app
     ports:
       - 8000:8000
     depends_on:
       - db
     volumes:
       - type: bind
-        source: ../
+        source: ./
         target: /home

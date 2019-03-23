@@ -28,7 +28,7 @@ class Cartoon(models.Model):
 
     class Meta:
         db_table = 'cartoon'
-        ordering = ['id']
+        ordering = ['release_date']
 
     @classmethod
     def get_list(cls, title=None, characters=None, start_at=None, end_at=None):
