@@ -1,11 +1,5 @@
 from django.db import models
-
-
-class Character(models.Model):
-    name = models.CharField(max_length=255, primary_key=True)
-
-    class Meta:
-        db_table = 'character'
+from django.utils import timezone
 
 
 class Cartoon(models.Model):
@@ -19,7 +13,7 @@ class Cartoon(models.Model):
     type = models.IntegerField(choices=TYPE_CHOICES, default=0)
     episode = models.IntegerField(default=0)
     title = models.CharField(max_length=256, default='')
-    release_date = models.DateField(default='0000-00-00')
+    release_date = models.DateField(default=timezone.now)
     characters = models.TextField(blank=True)
     thumbnail_hash = models.CharField(max_length=64, blank=True, default='')
     image_hash = models.CharField(max_length=64, blank=True, default='')

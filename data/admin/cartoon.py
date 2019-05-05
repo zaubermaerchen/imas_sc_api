@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from data.models import Cartoon
 
 
 class CartoonAdmin(admin.ModelAdmin):
@@ -31,5 +30,3 @@ class CartoonAdmin(admin.ModelAdmin):
     ]
     search_fields = ['title']
 
-
-admin.site.register(Cartoon, CartoonAdmin)

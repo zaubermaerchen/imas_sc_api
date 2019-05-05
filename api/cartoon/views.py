@@ -3,7 +3,7 @@ from rest_framework import generics
 from datetime import datetime
 from .serializer import SearchSerializer
 from .pagination import SearchLimitOffsetPagination
-from data.models import Cartoon
+from data.models.cartoon import Cartoon
 
 
 def convert_datetime_object(datetime_string, datetime_format):
