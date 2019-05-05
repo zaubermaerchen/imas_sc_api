@@ -7,6 +7,7 @@ class ProduceCardAdmin(admin.ModelAdmin):
         'name',
         'rarity',
         'idol',
+        'release_date',
     )
     fieldsets = [
         (None, {

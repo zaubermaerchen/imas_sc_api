@@ -36,7 +36,7 @@ class SupportCard(models.Model):
 
     class Meta:
         db_table = 'support_card'
-        ordering = ['-rarity', 'idol_id', 'release_date']
+        ordering = ['-rarity', 'idol', 'release_date']
 
     @classmethod
     def get_list(cls, idol_id_list=None, rarity_list=None):
