@@ -1,0 +1,420 @@
+openapi: 3.0.2
+info:
+  title: THE IDOLM@STER SHINY COLORS DATA API
+  version: '1.0'
+servers:
+  - url: https://zaubermaerchen.info/imas_sc/api
+paths:
+  /unit/list:
+    get:
+      summary: ユニットリスト取得API
+      operationId: getUnitList
+      responses:
+        '200':
+          description: ユニットリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Unit'
+  /idol/list:
+    get:
+      summary: アイドルリスト取得API
+      operationId: getIdolList
+      responses:
+        '200':
+          description: アイドルリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Idol'
+  /card/produce/search:
+    get:
+      summary: プロデュースカード検索API
+      operationId: searchProduceCard
+      parameters:
+        - name: idol_id
+          in: query
+          description: アイドルID
+          schema:
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+        - name: rarity
+          in: query
+          description: レアリティ (1:N 2:R 3:SR 4:SSR)
+          schema:
+            type: array
+            items:
+              type: integer
+            example:
+              - 4
+        - name: offset
+          in: query
+          description: 取得開始位置 省略時は先頭から取得
+          schema:
+            type: integer
+            example: 0
+        - name: limit
+          in: query
+          description: 取得件数 省略時は10件取得
+          schema:
+            type: integer
+            example: 10
+      responses:
+        '200':
+          description: 検索結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: 検索結果総件数
+                    example: 96
+                  next:
+                    type: string
+                    description: 次ページのURL
+                    example: "https://example.com/imas_sc/api/card/produce/search/?limit=10&offset=10"
+                  prev:
+                    type: string
+                    description: 前ページのURL
+                    example: null
+                  result:
+                    type: array
+                    description: 検索結果
+                    items:
+                      $ref: '#/components/schemas/ProduceCard'
+  /card/support/search:
+    get:
+      summary: サポートカード検索API
+      operationId: searchSupportCard
+      parameters:
+        - name: idol_id
+          in: query
+          description: アイドルID
+          schema:
+            type: array
+            items:
+              type: integer
+            example:
+              - 1
+        - name: rarity
+          in: query
+          description: レアリティ (1:N 2:R 3:SR 4:SSR)
+          schema:
+            type: array
+            items:
+              type: integer
+            example:
+              - 4
+        - name: offset
+          in: query
+          description: 取得開始位置 省略時は先頭から取得
+          schema:
+            type: integer
+            example: 0
+        - name: limit
+          in: query
+          description: 取得件数 省略時は10件取得
+          schema:
+            type: integer
+            example: 10
+      responses:
+        '200':
+          description: 検索結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: 検索結果総件数
+                    example: 96
+                  next:
+                    type: string
+                    description: 次ページのURL
+                    example: "https://example.com/imas_sc/api/card/support/search/?limit=10&offset=10"
+                  prev:
+                    type: string
+                    description: 前ページのURL
+                    example: null
+                  result:
+                    type: array
+                    description: 検索結果
+                    items:
+                      $ref: '#/components/schemas/SupportCard'
+  /character/names:
+    get:
+      summary: キャラクター名取得API
+      operationId: getCharacterNameList
+      responses:
+        '200':
+          description: キャラクター名リスト
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CharacterName'
+  /cartoon/search:
+    get:
+      summary: 4コマ漫画検索API
+      operationId: searchCartoon
+      parameters:
+        - name: title
+          in: query
+          description: 検索対象タイトル
+          schema:
+            type: string
+            example: ごあいさつ
+        - name: start_at
+          in: query
+          description: 検索対象公開日(開始)
+          schema:
+            type: string
+            example: '2018-02-08'
+        - name: end_at
+          in: query
+          description: 検索対象公開日(終了)
+          schema:
+            type: string
+            example: '2018-02-08'
+        - name: character
+          in: query
+          description: 検索対象アイドル
+          schema:
+            type: array
+            items:
+              type: string
+            example:
+              - 櫻木真乃
+              - 風野灯織
+              - 八宮めぐる
+        - name: offset
+          in: query
+          description: 取得開始位置 省略時は先頭から取得
+          schema:
+            type: integer
+            example: 0
+        - name: limit
+          in: query
+          description: 取得件数 省略時は10件取得
+          schema:
+            type: integer
+            example: 10
+      responses:
+        '200':
+          description: 検索結果
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: 検索結果総件数
+                    example: 74
+                  next:
+                    type: string
+                    description: 次ページのURL
+                    example: "https://example.com/imas_sc/api/cartoon/search/?limit=10&offset=10"
+                  prev:
+                    type: string
+                    description: 前ページのURL
+                    example: null
+                  result:
+                    type: array
+                    description: 検索結果
+                    items:
+                      $ref: '#/components/schemas/Cartoon'
+components:
+  schemas:
+    Unit:
+      type: object
+      description: ユニット情報
+      properties:
+        id:
+          type: integer
+          description: ユニットID
+          example: 1
+        name:
+          type: string
+          description: ユニット名
+          example: イルミネーションスターズ
+    Idol:
+      type: object
+      description: アイドル情報
+      properties:
+        id:
+          type: integer
+          description: アイドルID
+          example: 1
+        name:
+          type: string
+          description: アイドル名
+          example: 櫻木真乃
+    ProduceCard:
+      type: object
+      description: プロデュースカード情報
+      properties:
+        id:
+          type: integer
+          description: カードID
+          example: 31
+        name:
+          type: string
+          description: カード名
+          example: 【ほわっとスマイル】櫻木真乃
+        rarity:
+          type: integer
+          description: レアリティ (1:N 2:R 3:SR 4:SSR)
+          example: 4
+        idol_id:
+          type: integer
+          description: アイドルID
+          example: 1
+        release_date:
+          type: string
+          description: 登場日
+          example: '2018-04-24'
+        icon_hash:
+          type: string
+          description: アイコン画像ハッシュ
+          example: ba08928b10e4bc65ccd500629b85e6b02a70f8b7abf8801b39c83f888423e1b9
+        card_hash:
+          type: string
+          description: カード画像ハッシュ
+          example: 1f18dc539daf5f2e5b59b0eb75ed65ebdae848ec83d9094202ab3636593f0034
+        fes_card_hash:
+          type: string
+          description: フェスカード画像ハッシュ
+          example: e6f23075a39ce9c9e4164e3b91019a8d14cb99ef66d914de8d0d628b46e84582
+    SupportCard:
+      type: object
+      description: プロデュースカード情報
+      properties:
+        id:
+          type: integer
+          description: カードID
+          example: 38
+        name:
+          type: string
+          description: カード名
+          example: 【トリプルイルミネーション】櫻木真乃
+        rarity:
+          type: integer
+          description: レアリティ (1:N 2:R 3:SR 4:SSR)
+          example: 4
+        idol_id:
+          type: integer
+          description: アイドルID
+          example: 1
+        release_date:
+          type: string
+          description: 登場日
+          example: '2018-04-26'
+        icon_hash:
+          type: string
+          description: アイコン画像ハッシュ
+          example: 210257d4a8f989fbfc8c0251e907a7a31eca482887d7798d2a61c02dd8e2889e
+        card_hash:
+          type: string
+          description: カード画像ハッシュ
+          example: 7c177a6dbcc7296001eab870e7443591b72635623939bb8e151c6b536fb838f0
+        vocal:
+          type: integer
+          description: ボーカル初期値
+          example: 64
+        dance:
+          type: integer
+          description: ダンス初期値
+          example: 56
+        visual:
+          type: integer
+          description: ビジュアル初期値
+          example: 60
+        mental:
+          type: integer
+          description: メンタル初期値
+          example: 44
+        max_vocal:
+          type: integer
+          description: ボーカル最大値
+          example: 200
+        max_dance:
+          type: integer
+          description: ダンス最大値
+          example: 175
+        max_visual:
+          type: integer
+          description: ビジュアル最大値
+          example: 187
+        max_mental:
+          type: integer
+          description: メンタル最大値
+          example: 138
+        idea:
+          type: integer
+          description: アイデア (1:ボーカル 2:ダンス 3:ビジュアル 4:トーク 5:アピール)
+          example: 4
+    CharacterName:
+      type: object
+      description: キャラクター名情報
+      properties:
+        name:
+          type: string
+          description: キャラクター名
+          example: 七草はづき
+    Cartoon:
+      type: object
+      description: 漫画情報
+      properties:
+        id:
+          type: integer
+          description: 劇場ID
+          example: 10000
+        type:
+          type: integer
+          description: 種類 (0:通常 1:特別 2:ゲーム内限定)
+          example: 0
+        episode:
+          type: integer
+          description: 話数
+          example: 0
+        title:
+          type: string
+          description: タイトル
+          example: ごあいさつ
+        release_date:
+          type: string
+          description: 公開日
+          example: '2018-02-08'
+        characters:
+          type: array
+          description: 登場キャラクター
+          items: 
+            type: string
+          example:
+            - 櫻木真乃
+            - 風野灯織
+            - 八宮めぐる
+        thumbnail_hash:
+          type: string
+          description: サムネイル画像ハッシュ
+          example: 50b66b5f74559eaf139ba37a6484799b86edba588fe3095597b04e4482ac77d6
+        image_hash:
+          type: string
+          description: 漫画画像ハッシュ
+          example: f026bcda1be7def3b2e182870f3fce83318820675c588240a2d35fff5ab6d4bb
+        tweet_id:
+          type: integer
+          description: twitterのツイートID
+          example: 961544820589146000
