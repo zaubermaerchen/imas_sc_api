@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `character`;
 
 CREATE TABLE `character` (
   `name` varchar(255) PRIMARY KEY
-) ENGINE=Mroonga DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='default_tokenizer "TokenDelimit"';
+) ENGINE=Mroonga DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='default_tokenizer "TokenDelimit"';
 
 CREATE TABLE `cartoon` (
   `id` INT NOT NULL DEFAULT '0' PRIMARY KEY,
@@ -73,4 +73,4 @@ CREATE TABLE `cartoon` (
   UNIQUE INDEX `type_episode_index` (`type`, `episode`),
   FULLTEXT INDEX `title_index` (`title`),
   FULLTEXT INDEX `characters_index` (`characters`) COMMENT 'table "character"'
-) ENGINE=Mroonga DEFAULT CHARSET=utf8;
+) ENGINE=Mroonga DEFAULT CHARSET=utf8mb4;
