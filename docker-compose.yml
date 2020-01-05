@@ -17,6 +17,8 @@ services:
     build: docker/app
     ports:
       - 8000:8000
+    environment:
+      DJANGO_SETTINGS_MODULE : "api.settings.docker"
     depends_on:
       - db
     volumes:
