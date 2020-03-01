@@ -7,10 +7,10 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-django = "^3.0.2"
-djangorestframework = "^3.11.0"
-django-cors-headers = "^3.2.1"
-mysqlclient = "^1.4.6"
+django = "~3.0"
+djangorestframework = "~3.11"
+django-cors-headers = "~3.2"
+mysqlclient = "~1.4"
 
 [tool.poetry.dev-dependencies]
 
