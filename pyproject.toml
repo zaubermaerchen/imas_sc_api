@@ -6,11 +6,11 @@ authors = ["Mutsuki Kimuraya <sondessein@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.7"
-django = "~3.1"
-djangorestframework = "~3.11"
-django-cors-headers = "~3.2"
-mysqlclient = "~2.0"
+python = "^3.8"
+django = "^3.2"
+djangorestframework = "^3.11"
+django-cors-headers = "^3.2"
+mysqlclient = "^2.0"
 
 [tool.poetry.dev-dependencies]
 
